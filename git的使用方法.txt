@@ -1,0 +1,176 @@
+
+
+Git 使用，分支创建，提交，合并，只能提交文件夹
+
+
+准备工作 1 在需要上传的文件夹的根目录内 打开git bash here
+
+         2 $git init 
+
+         3 去github 或者 码云上新建仓库
+
+1，在Git创建仓库 
+
+点击 【New project】创建工程的仓库 例如：FistProject
+
+
+(2，全局配置
+
+在 Mac的终端 配置相关账户信息
+
+  已配置请忽略
+
+//类似于在你的MAC上添加你的账户信息，这个账户是Git权限管理人员分配的
+
+
+$ git config --global user.name "你的账户名"
+
+
+$ git config --global user.email "你的账户邮箱"
+--------------------- 
+！)
+
+3，把线上仓库克隆到本地 
+把线上仓库克隆到本地，然后在这个本地的仓库添加东西，你就可以提交了
+
+将
+http://192.168.x.xxx/xxxxxx/FirstProject.git 地方的仓库克隆到 FirstProject 这个地方
+
+
+
+$ git clone http://192.168.x.xxx/xxxxxx/FirstProject.git
+
+
+$ cd FirstProject
+
+然后你可以把你创建的工程放到你本地的仓库中 （即 把所有文件拖到仓库同名文件夹内）
+
+--------------------- 
+
+
+
+
+4，提交 
+在 本地的仓库中添加东西，项目文件都可以！
+
+$ git add . 
+ /*添加提交信息，并计较到本地仓库*/
+
+
+$ git commit -m "第一次提交"
+ /*将这些东西推送到线上仓库*/
+
+
+$ git push origin master  //等待完成
+--------------------- 
+
+
+
+============分支创建，提交，合并============== 
+
+1，我们创建devTest分支，然后切换到devTest分支：
+
+
+
+$git checkout -b devTest
+
+
+
+git checkout命令加上-b参数表示创建并切换，相当于以下两条命令：
+
+
+
+$ git branch devTest
+
+
+$ git checkout devTest
+
+
+
+然后，用git branch命令查看当前分支：
+
+
+
+$ git branch
+
+  * devTest
+  
+   master
+
+
+git branch命令会列出所有分支，当前分支前面会标一个*号。
+
+
+
+3，我们就可以在devTest分支上正常提交
+
+ 
+我在项目的 AppDelegate.swift 文件中加上一行：//这是在分支上添加的东西**********
+
+
+
+然后提交： 还是在 FirstProject目录下哦
+
+
+
+$ git add .
+$ git commit -m "在分支上提交"
+
+
+$ git push origin devTest //推送到线上分支
+--------------------- 
+
+4，合并 
+
+
+先切换回主干
+
+
+
+$ git checkout master
+
+
+然后合并
+
+
+
+$ git merge devTest
+
+
+
+然后
+
+
+
+$ git add .
+
+$ git commit -m "吧分支的东西合并merge 并提交"
+
+$ git push origin master
+
+
+到此，分支创建，提交，合并再提交完成
+ 
+
+合并完成后，就可以放心地删除dev分支了：
+
+
+
+$ git branch -d devTest
+//
+Deleted branch devTest
+ 
+
+删除后，查看branch，就只剩下master分支了：
+
+
+
+$ git branch
+* master
+1
+2
+注意 
+如果Xcode创建的项目，只能提交文件夹，不能提交具体代码，那么只需要在创建项
+目的时候，把默认的本地创建Git选项取消就可以了，
+--------------------- 
+
